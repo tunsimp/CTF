@@ -1,0 +1,249 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Haunted Inventory Manager - Halloween Edition</title>
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+            crossorigin="anonymous"
+        />
+        <link
+            rel="stylesheet"
+            href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
+        />
+        <link rel="stylesheet" href="/static/css/styles.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossorigin=""
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Creepster&amp;display=swap"
+            rel="stylesheet"
+        />
+        <!-- Prism.js for syntax highlighting -->
+        <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/themes/prism-okaidia.min.css"
+            rel="stylesheet"
+        />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/prism.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/components/prism-sql.min.js"></script>
+        <style>
+            body {
+                background-color: #0c0c0c;
+                color: #e4e4e4;
+                font-family: "Creepster", cursive;
+            }
+
+            h3,
+            p {
+                color: #ff7518; /* Halloween orange */
+            }
+
+            .btn {
+                background-color: #ff7518;
+                color: black;
+                border: none;
+            }
+
+            .btn:hover {
+                background-color: #ff8e3c;
+            }
+
+            input[type="text"] {
+                background-color: #2d2d2d;
+                color: white;
+                /* border: 2px solid #ff7518; */
+            }
+
+            input[type="text"]::placeholder {
+                color: #ff8e3c;
+            }
+
+            .footer-header h4 {
+                color: #e4e4e4;
+                font-family: "Creepster", cursive;
+            }
+
+            /* Halloween themed borders and background */
+            .container {
+                background-color: #2d2d2d;
+                border: 4px solid #ff7518;
+                border-radius: 15px;
+                padding: 20px;
+            }
+
+            .footer {
+                background-color: #0c0c0c;
+            }
+
+            /* Halloween themed scrollbars */
+            ::-webkit-scrollbar {
+                width: 10px;
+            }
+
+            ::-webkit-scrollbar-track {
+                background: #0c0c0c;
+            }
+
+            ::-webkit-scrollbar-thumb {
+                background: #ff7518;
+            }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background: #ff8e3c;
+            }
+
+            .warning {
+                color: #ff7518;
+                font-weight: bold;
+            }
+
+            /* Halloween themed icons for minimize, expand, and fullscreen */
+            #minimize svg,
+            #expand svg,
+            #fullscreen svg {
+                fill: #ff7518;
+            }
+
+            #minimize:hover svg,
+            #expand:hover svg,
+            #fullscreen:hover svg {
+                fill: #ff8e3c;
+            }
+
+            /* Prism syntax highlighting customization */
+            pre[class*="language-"] {
+                height: 100%;
+                overflow: scroll;
+                background: #1e1e1e;
+                color: #ff7518;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container mt-5" id="main-content">
+            <div class="p-3">
+                <h3>🎃 Haunted Inventory Manager 🎃</h3>
+                <br />
+                <p>
+                    Welcome to the spooky future of haunted inventory
+                    management. Keep track of your eerie and cursed items... if
+                    you dare!
+                </p>
+                <p class="warning">
+                    ⚠️ Attention: Our system is haunted by an unknown force. The
+                    system is locked down for your safety. ⚠️
+                </p>
+                <p>
+                    Search the cursed inventory manually below, if you dare...
+                    👻
+                </p>
+                <input
+                    type="text"
+                    name="query"
+                    id="searchInput"
+                    style="width: 100%"
+                    class="p-2"
+                    placeholder="Search for haunted items..."
+                    value=""
+                    oninput="updateQuery()"
+                />
+                <button type="submit" class="btn mt-3" onclick="performQuery()">
+                    Search
+                </button>
+                <div class="col-xs-1 section-header mt-5" align="center">
+                    Results
+                </div>
+                <div id="resultsContainer"></div>
+            </div>
+        </div>
+        <div class="footer expanded" id="footer">
+            <div class="footer-sections">
+                <div class="footer-header">
+                    <button id="minimize" class="btn-danger">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            fill="white"
+                            class="bi bi-dash"
+                            viewBox="0 0 16 16"
+                        >
+                            <path
+                                d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"
+                            ></path>
+                        </svg>
+                    </button>
+                    <button id="expand" class="btn-warning">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            fill="white"
+                            class="bi bi-arrows-angle-expand"
+                            viewBox="0 0 16 16"
+                        >
+                            <path
+                                fill-rule="evenodd"
+                                d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707m4.344-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707"
+                            ></path>
+                        </svg>
+                    </button>
+                    <button id="fullscreen" class="btn-success">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            fill="white"
+                            class="bi bi-arrows-fullscreen"
+                            viewBox="0 0 16 16"
+                        >
+                            <path
+                                fill-rule="evenodd"
+                                d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 1 0 1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707m4.344 0a.5.5 0 0 1 .707 0l4.096 4.096V11.5a.5.5 0 1 1 1 0v3.975a.5.5 0 0 1-.5.5H11.5a.5.5 0 0 1 0-1h2.768l-4.096-4.096a.5.5 0 0 1 0-.707m0-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707m-4.344 0a.5.5 0 0 1-.707 0L1.025 1.732V4.5a.5.5 0 0 1-1 0V.525a.5.5 0 0 1 .5-.5H4.5a.5.5 0 0 1 0 1H1.732l4.096 4.096a.5.5 0 0 1 0 .707"
+                            ></path>
+                        </svg>
+                    </button>
+                    <h4>👻 Debug Information</h4>
+                </div>
+                <div class="footer-section-container">
+                    <div class="footer-section">
+                        <h4>SQL Query</h4>
+                        <pre
+                            class="language-sql"
+                            tabindex="0"
+                        ><code id="debugQuery" class="language-sql"><span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> inventory <span class="token keyword">WHERE</span> name <span class="token operator">LIKE</span> <span class="token string">'%a%'</span></code></pre>
+                    </div>
+                    <div class="footer-section">
+                        <h4>SQL Output</h4>
+                        <pre
+                            class="language-js"
+                            tabindex="0"
+                        ><code id="debugMessage" class="language-js"></code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script
+            src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7W3mgPxhU9K/ScQsAP7W3mgPxhU9K/ScQsAP7W3mgPxhU9K/ScQsAP7W3mgPxhU9K/ScQsAP7W3mgPxhU9K/ScQsAP7W3mgPxhU9K/ScQsAP7W3mgPxhU9K"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"
+        ></script>
+        <script src="static/js/script.js"></script>
+    </body>
+</html>
