@@ -1,0 +1,14 @@
+services:
+  web:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "9006:1337"
+    volumes:
+      - ./src:/app
+      - ./bot:/bot
+    env_file:
+      - path: .env.example
+        required: true
+      - path: .env
+        required: false

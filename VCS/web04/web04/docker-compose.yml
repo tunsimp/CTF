@@ -1,0 +1,11 @@
+services:
+  web:
+    build: .
+    ports:
+      - "9004:1337"
+    restart: unless-stopped
+    env_file:
+      - path: .env.example
+        required: true
+      - path: .env
+        required: false
