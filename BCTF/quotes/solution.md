@@ -2,7 +2,7 @@
 ---
 
 # Solution
-First we need to go to register endpoint to get cookie
+First we need to go to register endpoint to get cookie.
 ```javascript
 app.get("/register", (req, res) => {
   const token = jwt.sign(
@@ -23,7 +23,7 @@ app.get("/register", (req, res) => {
 });
 ```
 
-The server take the id in the request parameter then response with a quote according to the id. There is a condition that if the id exceed the free limit(5), we wont get anything. But the id is parse to Number method and parseInt method
+The server take the id in the request parameter then response with a quote according to the id. There is a condition that if the id exceed the free limit(5), we wont get anything. But the id is parse to Number method and parseInt method.
 ```javascript
   if (id) {
     const i = Number(id);
