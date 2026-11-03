@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encoded Recipe</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Your Encoded Recipe</h1>
+    </header>
+    <main>
+        <p>Your recipe has been encoded and stored. Here is the encoded recipe:</p>
+        <textarea rows="10" cols="120" readonly>{{ data }}</textarea>
+        <p><a href="{{ url_for('view_recipe')}}" class="button">View Recipe</a></p>
+        <a href="{{ url_for('home') }}" class="button">Back to Home</a>
+    </main>
+</body>
+</html>

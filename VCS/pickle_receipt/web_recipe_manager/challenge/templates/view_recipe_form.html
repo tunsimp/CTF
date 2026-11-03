@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Recipe</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>View Recipe</h1>
+    </header>
+    <main>
+        <form action="{{ url_for('view_recipe') }}" method="POST">
+            <label for="encrypted_data">Enter Encoded Recipe:</label>
+            <textarea id="encrypted_data" name="encrypted_data" rows="10" cols="110" required></textarea>
+            <button type="submit">View Recipe</button>
+        </form>
+        <a href="{{ url_for('home') }}" class="button">Back to Home</a>
+    </main>
+</body>
+</html>

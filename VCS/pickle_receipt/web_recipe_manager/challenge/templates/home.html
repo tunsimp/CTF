@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Manager Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Welcome to the Recipe Manager</h1>
+    </header>
+    <main>
+        <p>Welcome to the Recipe Manager! Here you can securely submit and view your secret recipes.</p>
+        <nav>
+            <a href="{{ url_for('submit_recipe') }}" class="button">Submit Recipe</a>
+            <a href="{{ url_for('view_recipe') }}" class="button">View Recipe</a>
+        </nav>
+    </main>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Recipe</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>View Your Recipe</h1>
+    </header>
+    <main>
+        <div class="recipe">
+            <h2>{{ recipe.recipe_name }}</h2>
+            <p><strong>Ingredients:</strong> {{ recipe.ingredients }}</p>
+            <p><strong>Secret Ingredient:</strong> {{ recipe.secret_ingredient }}</p>
+        </div>
+        <a href="{{ url_for('home') }}" class="button">Back to Home</a>
+    </main>
+</body>
+</html>

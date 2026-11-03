@@ -1,0 +1,8 @@
+services:
+  web_recipemanager:
+    build: .
+    container_name: web_recipemanager
+    ports:
+      - "9001:1337"
+    environment:
+      - APP_ENCRYPTION_KEY=E-LfaRyL541TMZPAO1wJ5x4eVMkp7oRoJxqEZAoSsVs=

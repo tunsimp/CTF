@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Recipe</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Submit Your Secret Recipe</h1>
+    </header>
+    <main>
+        <form action="{{ url_for('submit_recipe') }}" method="POST">
+            <label for="recipe_name">Recipe Name:</label>
+            <input type="text" id="recipe_name" name="recipe_name" required>
+
+            <label for="ingredients">Ingredients:</label>
+            <textarea id="ingredients" name="ingredients" required></textarea>
+
+            <label for="secret_ingredient">Secret Ingredient:</label>
+            <input type="text" id="secret_ingredient" name="secret_ingredient" required>
+
+            <button type="submit">Submit Recipe</button>
+        </form>
+        <a href="{{ url_for('home') }}" class="button">Back to Home</a>
+    </main>
+</body>
+</html>
